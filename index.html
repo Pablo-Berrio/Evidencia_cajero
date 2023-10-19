@@ -1,112 +1,126 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <title>WELT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Merriweather:ital,wght@1,900&family=Noto+Serif:ital,wght@1,700&family=PT+Sans:ital,wght@0,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/nuevoDiseño.css">
+    <title>Diseño login</title>
+    <!-- <img src="assets/img/logo.png" alt="logo"> -->
 </head>
+
 <body>
-    <header class="encabezado">
-        <section class="logo">
-            <img src="assets/img/logo.png" alt="">
-            <h1>WELT BANC</h1>
+
+    <section class="inicio-sesion">
+        <section class="contenedor-principal">
+            <div class="contenedor-tarjeta">
+                <article class="tarjeta">
+                    <div class="nombre-banco">
+                        <h1>WELT BANC</h1>
+                    </div>
+                    <div class="imagen">
+                        <img src="assets/img/tarjeta-de-credito.png" alt="chip">
+                    </div>
+                    <div class="numero-tarjeta">
+                        <p id="numero-cuenta">12345678901</p>
+                    </div>
+                    <div class="nombre-cliente">
+                        <h2 id="nombre-usuario">Nombre de usuario</h2>
+                        <h3>Gold Card</h3>
+                    </div>
+                </article>
+            </div>
+            <div class="contenedor-formulario">
+                <form action="#">
+                    <h1>Inicio De Sesion</h1>
+                    <input type="text" placeholder="Numero De Cuenta" id="cuenta">
+                    <input type="text" placeholder="Usuario" id="input-usuario">
+                    <input type="password" name="password" id="password" placeholder="Contraseña">
+                    <button type="button" class="boton-entrar" id="boton-inicio">Entrar</button>
+                    <a href="#" id="cambiar">Quiero Crear Una Cuenta </a>
+                </form>
+            </div>
         </section>
-        <section class="login">
-            <button class="registrar-cuenta entrar" >Hazte Cliente</button>
-            <button class="iniciar-sesion entrar">Iniciar Sesion</button>
+    </section>
+
+    <section class="registro-cuenta" style="display: none;">
+        <section class="contenedor-principal">
+            <div class="contenedor-formulario">
+                <form action="#">
+                    <h1>Registrar Cuenta</h1>
+                    <input type="text" placeholder="Numero De Cuenta" id="cuenta-nueva">
+                    <input type="text" placeholder="Nombres" id="input-usuario-nuevo">
+                    <input type="email" name="email" id="email" placeholder="Correo Electronico">
+                    <input type="password" name="password" id="password-nuevo" placeholder="Contraseña">
+                    <input type="text" placeholder="Saldo Inicial">
+                    <button type="button" class="boton-entrar">Registrar</button>
+                    <a href="#" id="cambiar-2">Ya tengo una cuenta</a>
+                </form>
+            </div>
+            <div class="contenedor-tarjeta">
+                <article class="tarjeta-2">
+                    <div class="nombre-banco">
+                        <h1>WELT BANC</h1>
+                    </div>
+                    <div class="imagen">
+                        <img src="assets/img/tarjeta-de-credito.png" alt="chip">
+                    </div>
+                    <div class="numero-tarjeta">
+                        <p id="numero-cuenta-nueva">12345678901</p>
+                    </div>
+                    <div class="nombre-cliente">
+                        <h2 id="nombre-usuario-nuevo">Nombre de usuario</h2>
+                        <h3>Gold Card</h3>
+                    </div>
+                </article>
+            </div>
         </section>
-    </header>
-    <main class="contenedor">
-        <section class="primera-fila">
-            <article class="card-1">
-                <h1>Consultar Saldo</h1>
-                <img src="assets/img/saldo.png" alt="">
-                <button>IR -></button>
-            </article>
-            <article class="card-2">
-                <h1>Retirar</h1>
-                <img src="assets/img/retirar.png" alt="">
-                <button>IR -></button>
-            </article>
-        </section>
-        <section class="segunda-fila">
-            <article class="card-1">
-                <h1>Transferir</h1>
-                <img src="assets/img/transferir.png" alt="">
-                <button>IR -></button>
-            </article>
-            <article class="card-2">
-                <h1>Ahorrar</h1>
-                <img src="assets/img/ahorrar.png" alt="">
-                <button>IR -></button>
-            </article>
+    </section>
+
+    <main class="pagina-principal" id="pagina-principal" style="display: none">
+        <header class="encabezado">
+            <section class="logo">
+                <img src="assets/img/logo.png" alt="">
+                <h1>WELT BANC</h1>
+            </section>
+            <section class="login">
+                <button class="iniciar-sesion entrar" id="cerrar-sesion">Cerrar Sesion</button>
+            </section>
+        </header>
+        <section class="contenedor">
+            <section class="primera-fila">
+                <article class="card-1">
+                    <h1>Consultar Saldo</h1>
+                    <img src="assets/img/saldo.png" alt="">
+                    <button type="button" id="botonConsultar">IR -></button>
+                </article>
+                <article class="card-2">
+                    <h1>Retirar</h1>
+                    <img src="assets/img/retirar.png" alt="">
+                    <button type="button" class="botonesOpciones" id="botonRetirar">IR -></button>
+                </article>
+            </section>
+            <section class="segunda-fila">
+                <article class="card-1">
+                    <h1>Transferir</h1>
+                    <img src="assets/img/transferir.png" alt="">
+                    <button type="button" class="botonesOpciones">IR -></button>
+                </article>
+                <article class="card-2">
+                    <h1>Ahorrar</h1>
+                    <img src="assets/img/ahorrar.png" alt="">
+                    <button type="button" class="botonesOpciones">IR -></button>
+                </article>
+            </section>
         </section>
     </main>
 
-    <section class="modal ">
-        <article class="contenedor-modal">
-            <form action="">
-                <h2 class="titulo">Inicio De Sesion</h2>
-                <div class="contenedor-formulario">
-                    <div class="inputs">
-                        <input type="text" id="name" class="form-input" placeholder=" ">
-                        <label for="name" class="label">Nombre </label>
-                    </div>
-                    <div class="inputs">
-                        <input type="text" id="user" class="form-input" placeholder=" ">
-                        <label for="user" class="label">Usuario </label>
-                    </div>
-                    <div class="inputs">
-                        <input type="password" id="password" class="form-input" placeholder=" ">
-                        <label for="password" class="label">Contraseña </label>
-                    </div>
-
-                    <button type="submit" value="Entrar" class="form-submit">Entrar</button>
-                    <button id="cerrar-modal">Cerrar</button>
-                </div>
-            </form>
-        </article>
-    </section>
-
-    <section class="modal2 ">
-        <article class="contenedor-modal2">
-            <form action="">
-                <h2 class="titulo2">Registrar Cuenta</h2>
-                <div class="contenedor-formulario2">
-                    <div class="inputs">
-                        <input type="text" id="name" class="form-input" placeholder=" ">
-                        <label for="name" class="label">Nombre </label>
-                        <span class="form-line"></span>
-                    </div>
-                    <div class="inputs">
-                        <input type="text" id="user" class="form-input" placeholder=" ">
-                        <label for="user" class="label">Nombre De Usuario </label>
-                        <span class="form-line"></span>
-                    </div>
-                    <div class="inputs">
-                        <input type="email" id="email" class="form-input" placeholder=" ">
-                        <label for="email" class="label">Correo </label>
-                        <span class="form-line"></span>
-                    </div>
-                    <div class="inputs">
-                        <input type="password" id="password" class="form-input" placeholder=" ">
-                        <label for="password" class="label">Contraseña </label>
-                        <span class="form-line"></span>
-                    </div>
-                    <div class="inputs">
-                        <input type="number" id="saldo-inicial" class="form-input" placeholder=" ">
-                        <label for="saldo-inicial" class="label">Saldo Inicial </label>
-                        <span class="form-line"></span>
-                    </div>
-
-                    <button type="submit" value="Entrar" class="form-submit">Registrar</button>
-                    <button id="cerrar-modal2">Cerrar</button>
-                </div>
-            </form>
-        </article>
-    </section>
-
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/nuevoDiseño.js"></script>
 </body>
+
 </html>
