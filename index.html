@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Merriweather:ital,wght@1,900&family=Noto+Serif:ital,wght@1,700&family=PT+Sans:ital,wght@0,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/nuevoDiseño.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <title>Diseño login</title>
     <!-- <img src="assets/img/logo.png" alt="logo"> -->
 </head>
@@ -55,8 +55,8 @@
                     <h1>Registrar Cuenta</h1>
                     <input type="text" placeholder="Numero De Cuenta" id="cuenta-nueva">
                     <input type="text" placeholder="Nombres" id="input-usuario-nuevo">
-                    <input type="email" name="email" id="email" placeholder="Correo Electronico">
-                    <input type="password" name="password" id="password-nuevo" placeholder="Contraseña">
+                    <input type="password"  id="password-nuevo" placeholder="Contraseña">
+                    <input type="password" name="password" id="confirmacion-password-nuevo" placeholder="Confirmar Contraseña">
                     <input type="text" placeholder="Saldo Inicial">
                     <button type="button" class="boton-entrar">Registrar</button>
                     <a href="#" id="cambiar-2">Ya tengo una cuenta</a>
@@ -89,7 +89,7 @@
                 <h1>WELT BANC</h1>
             </section>
             <section class="login">
-                <button class="iniciar-sesion entrar" id="cerrar-sesion">Cerrar Sesion</button>
+                <button class="cerrar-sesion" id="cerrar-sesion" onclick="alerta()">Cerrar Sesion</button>
             </section>
         </header>
         <section class="contenedor">
@@ -97,30 +97,139 @@
                 <article class="card-1">
                     <h1>Consultar Saldo</h1>
                     <img src="assets/img/saldo.png" alt="">
-                    <button type="button" id="botonConsultar">IR -></button>
+                    <button type="button" id="boton-Consultar" onclick="consultarSaldo()">IR -></button>
                 </article>
                 <article class="card-2">
                     <h1>Retirar</h1>
                     <img src="assets/img/retirar.png" alt="">
-                    <button type="button" class="botonesOpciones" id="botonRetirar">IR -></button>
+                    <button type="button" class="botonesOpciones" id="botonRetirar" onclick="mostrarRetirar()">IR -></button>
                 </article>
             </section>
             <section class="segunda-fila">
                 <article class="card-1">
                     <h1>Transferir</h1>
                     <img src="assets/img/transferir.png" alt="">
-                    <button type="button" class="botonesOpciones">IR -></button>
+                    <button type="button" class="botonesOpciones" onclick="mostrarTransferir()">IR -></button>
                 </article>
                 <article class="card-2">
-                    <h1>Ahorrar</h1>
+                    <h1>Consignar</h1>
                     <img src="assets/img/ahorrar.png" alt="">
-                    <button type="button" class="botonesOpciones">IR -></button>
+                    <button type="button" class="botonesOpciones" onclick="mostrarConsignar()">IR -></button>
                 </article>
             </section>
         </section>
     </main>
 
-    <script src="assets/js/nuevoDiseño.js"></script>
+    <aside class="contenedor-consultar" style="display: none;">
+        <div class="container">
+            <div class="contenedor-imagen-section">
+                <img src="assets/img/saldo-color.png" alt="logo consultar saldo">
+                <section class="contenedor-saldo-movimientos">
+                    <h1>Saldo y Movimientos</h1>
+                    <h3>Saldo Disponible</h3>
+                    <h2>100000</h2>
+                    <div class="historial">
+                        <article class="historial-1">
+                            <p>hola</p>
+                            <p>hola</p>
+                            <p>hola</p>
+                            <p>hola</p>
+                            <p>hola</p>
+                            <p>hola</p>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </aside> 
+
+    <aside class="contenedor-retirar" style="display: none;">
+        <div class="container-retirar">
+            <div class="contenedor-imagen-section-retirar">
+                <img src="assets/img/retirar-color.png" alt="logo-retirar">
+                <section class="contenedor-retiros">
+                    <h1>Retiros</h1>
+                    <input type="text" placeholder="Ingrese El Valor A Retirar">
+                    <input type="password" placeholder="Ingrese Su Contraseña">
+                    <button type="button">Retirar</button>
+                </section>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </aside>
+
+    <aside class="contenedor-transferir" style="display: none;">
+        <div class="container-transferir">
+            <div class="contenedor-imagen-section-transferir">
+                <img src="assets/img/transferir-color.png" alt="logo-transferir">
+                <section class="contenedor-transferencias">
+                    <h1>Transferencias</h1>
+                    <input type="text" placeholder="Nombre de la persona que recibe">
+                    <input type="email" placeholder="correo de quien recibe">
+                    <input type="text" placeholder="Numero de cuenta">
+                    <input type="text" placeholder="Total a transferir">
+                    <input type="password" placeholder="Ingrese Su Contraseña">
+                    <button type="button">Transferir</button>
+                </section>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </aside>
+
+    <aside class="contenedor-consignar" style="display: none;">
+        <div class="container-consignar">
+            <div class="contenedor-imagen-section-consignar">
+                <img src="assets/img/ahorrar-color.png" alt="logo-consignar">
+                <section class="contenedor-consignaciones">
+                    <h1>Consignaciones</h1>
+                    <input type="text" placeholder="Numero de cuenta">
+                    <select name="tipo de cuenta" id="tipocuenta">
+                        <option value="Ahorros">Ahorros</option>
+                        <option value="Corriente">Corriente</option>
+                    </select>
+                    <input type="text" placeholder="Valor a consignar">
+                    <button type="button">Consignar</button>
+                </section>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </aside>
+
+    <article class="contenedor-loading" style="display: none;">
+        <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+        </div>
+    </article>
+
+    <article class="contenedor-loading-hamster" style="display: none;">
+        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster" >
+            <div class="wheel"></div>
+            <div class="hamster">
+                <div class="hamster__body">
+                    <div class="hamster__head">
+                        <div class="hamster__ear"></div>
+                        <div class="hamster__eye"></div>
+                        <div class="hamster__nose"></div>
+                    </div>
+                    <div class="hamster__limb hamster__limb--fr"></div>
+                    <div class="hamster__limb hamster__limb--fl"></div>
+                    <div class="hamster__limb hamster__limb--br"></div>
+                    <div class="hamster__limb hamster__limb--bl"></div>
+                    <div class="hamster__tail"></div>
+                </div>
+            </div>
+            <div class="spoke"></div>
+        </div>
+    </article>
+    
+
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
