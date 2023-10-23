@@ -188,8 +188,8 @@ main{
 }
 
 .encabezado h1{
-    font-size: 40px;
-    letter-spacing: 5px;
+    font-size: 35px;
+    letter-spacing: 3px;
 }
 
 .logo{
@@ -206,21 +206,32 @@ main{
 }
 
 .login{
-    width: 30%;
+    width: 40%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login h2{
+  font-size: 30px;
+  text-shadow: 0.1rem 0.1rem 1rem #A742E4;
 }
 
 .login button{
     margin: 20px;
-    width: 300px;
-    height: 40px;
+    width: 200px;
+    height: 50px;
     color: white;
     border: none;
     border-radius: 10px;
     background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
-    box-shadow: 0.1rem 0.1rem 1rem black;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login button:hover{
+  box-shadow: 0.1rem 0.1rem 1rem black;
 }
 
 .primera-fila{
@@ -262,6 +273,12 @@ main{
     height: 10%;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: bold;
+}
+
+.card-1 button:hover{
+  background-color: #100A38;
+  color: #EEEEEE;
 }
 
 .card-2{
@@ -289,6 +306,11 @@ main{
     height: 10%;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.card-2 button:hover{
+  background-color: #100A38;
+  color: #EEEEEE;
 }
 
 
@@ -391,7 +413,7 @@ main{
     align-items: center;
 }
     
-.historial-1{
+.historial article{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -400,6 +422,7 @@ main{
     height: 15%;
     width: 98%;
     border-radius: 7px;
+    font-weight: bold;
 }
 
 
@@ -469,7 +492,67 @@ main{
     border: none;
     border-radius: 7px;
     color: aliceblue;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.contenedor-retiros button:hover{
+  box-shadow: 0.1rem 0.1rem 1rem black;
+}
+
+
+/*-----ESTILOS RETIRO EXITOSO-----*/
+.retiro-exitoso{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #EEEDED;
+}
+
+.imagen-datos-retiro{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 75%;
+  align-items: center;
+}
+
+.imagen-datos-retiro img{
+  height: 20%;
+  width: 20%;
+}
+
+.imagen-datos-retiro h1{
+  margin-top: 8%;
+  color: #6217EE;
+}
+
+.contenedor-datos-retiro{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dato{
+  border: 1px solid grey;
+  width: 100%;
+  height: 20%;
+  background-color: #F6F1EE;
+}
+
+.dato h3{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dato p{
+  font-size: 20px;
+  font-weight: 500;
 }
 
 
@@ -539,7 +622,67 @@ main{
     border: none;
     border-radius: 7px;
     color: aliceblue;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.contenedor-transferencias button:hover{
+  box-shadow: 0.1rem 0.1rem 1rem black;
+}
+
+
+/*-----ESTILOS TRANSFERENCIA EXITOSA-----*/
+.transferencia-exitosa{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #EEEDED;
+}
+
+.imagen-datos-transferencia{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 75%;
+  align-items: center;
+}
+
+.imagen-datos-transferencia img{
+  height: 20%;
+  width: 20%;
+}
+
+.imagen-datos-transferencia h1{
+  margin-top: 8%;
+  color: #6217EE;
+}
+
+.contenedor-datos-transferencia{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dato{
+  border: 1px solid grey;
+  width: 100%;
+  height: 20%;
+  background-color: #F6F1EE;
+}
+
+.dato h3{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dato p{
+  font-size: 20px;
+  font-weight: 500;
 }
 
 
@@ -616,9 +759,68 @@ main{
     border: none;
     border-radius: 7px;
     color: aliceblue;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: bold;
 }
 
+.contenedor-consignaciones button:hover{
+  box-shadow: 0.1rem 0.1rem 1rem black;
+}
+
+
+/*-----ESTILOS CONSIGNACION EXITOSA-----*/
+.consignacion-exitosa{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #EEEDED;
+}
+
+.imagen-datos{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 75%;
+  align-items: center;
+}
+
+.imagen-datos img{
+  height: 20%;
+  width: 20%;
+}
+
+.imagen-datos h1{
+  margin-top: 8%;
+  color: #6217EE;
+}
+
+.contenedor-datos{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dato{
+  border: 1px solid grey;
+  width: 100%;
+  height: 20%;
+  background-color: #F6F1EE;
+}
+
+.dato h3{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dato p{
+  font-size: 20px;
+  font-weight: 500;
+}
 
 /*-----ANIMACION LOADING-----*/
 .contenedor-loading{
@@ -1007,4 +1209,59 @@ main{
       transform: rotate(-1turn);
     }
   }
-  
+
+  .error_cuenta_nueva {
+    color: red;
+    display: none;
+  }
+
+  .error_usuario_nuevo {
+    color: red;
+    display: none;
+  }
+
+  .confirmacion_clave {
+    color: red;
+    display: none;
+  }
+
+  .error_clave_nueva {
+    color: red;
+    display: none;
+  }
+
+  .error_saldo_inicial {
+    color: red;
+    display: none;
+  }
+
+  .cuenta_nueva {
+    border: 2px solid red;
+  }
+
+  .usuario_nuevo {
+    border: 2px solid red;
+  }
+
+  .clave_nueva {
+    border: 2px solid red;
+  }
+
+  .confirmacion_clave_nueva {
+    border: 2px solid red;
+  }
+
+  .saldo_inicial {
+    border: 2px solid red;
+  }
+
+  .alerta_cantidad {
+    border: 2px solid red;
+  }
+  form input [type="button"]{
+    width: 100px;
+    cursor: pointer;
+    }
+    .ancho{
+      width: 270px;
+  }

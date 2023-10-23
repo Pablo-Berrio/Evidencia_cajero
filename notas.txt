@@ -1,0 +1,26 @@
+-----PALETA DE COLORES-----
+#080202
+#EEEEEE
+#068FFF
+#A742E4
+#100A38
+#EEEDED
+#F6F1EE
+#ffffff
+#EEEDED
+#6217EE
+#210BF3
+aliceblue
+white
+black
+grey
+
+
+-----PAGINAS DE UTILIDAD PARA EL DESARROLLO DE ESTA APLICACION WEB-----
+https://coolors.co/
+https://www.flaticon.es/
+https://webgradients.com/
+https://colorhunt.co/
+https://www.magicpattern.design/
+https://uiverse.io/
+https://fonts.google.com/

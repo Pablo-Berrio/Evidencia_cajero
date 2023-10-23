@@ -9,9 +9,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Merriweather:ital,wght@1,900&family=Noto+Serif:ital,wght@1,700&family=PT+Sans:ital,wght@0,400;1,700&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="assets/img/banco (1).png">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <title>Diseño login</title>
-    <!-- <img src="assets/img/logo.png" alt="logo"> -->
+    <title>WELT BANC</title>
 </head>
 
 <body>
@@ -36,12 +36,12 @@
                 </article>
             </div>
             <div class="contenedor-formulario">
-                <form action="#">
+                <form action="#" id="formulario-inicio-sesion">
                     <h1>Inicio De Sesion</h1>
-                    <input type="text" placeholder="Numero De Cuenta" id="cuenta">
+                    <input type="text" placeholder="Numero De Cuenta" id="cuenta" required>
                     <input type="text" placeholder="Usuario" id="input-usuario">
                     <input type="password" name="password" id="password" placeholder="Contraseña">
-                    <button type="button" class="boton-entrar" id="boton-inicio">Entrar</button>
+                    <button type="button" class="boton-entrar" id="boton-inicio" onclick="validarInicioDeSesion()">Entrar</button>
                     <a href="#" id="cambiar">Quiero Crear Una Cuenta </a>
                 </form>
             </div>
@@ -54,11 +54,16 @@
                 <form action="#">
                     <h1>Registrar Cuenta</h1>
                     <input type="text" placeholder="Numero De Cuenta" id="cuenta-nueva">
-                    <input type="text" placeholder="Nombres" id="input-usuario-nuevo">
+                    <span class="error_cuenta_nueva" id="error-cuenta-nueva">Número de cuenta invalido, debe tener 11 caracteres númericos</span>
+                    <input type="text" placeholder="Nombres de usuario" id="input-usuario-nuevo">
+                    <span class="error_usuario_nuevo" id="error-usuario-nuevo">Nombre de usuario invalido</span>
                     <input type="password"  id="password-nuevo" placeholder="Contraseña">
+                    <span class="error_clave_nueva" id="error-clave-nueva">Contraseña invalida, debe tener 4 caracteres númericos</span>
                     <input type="password" name="password" id="confirmacion-password-nuevo" placeholder="Confirmar Contraseña">
-                    <input type="text" placeholder="Saldo Inicial">
-                    <button type="button" class="boton-entrar">Registrar</button>
+                    <span class="confirmacion_clave" id="confirmacion-clave">Las claves no coinciden</span>
+                    <input type="text" placeholder="Saldo Inicial" id="saldo-inicial-nuevo">
+                    <span class="error_saldo_inicial" id="error-saldo-inicial">Saldo invalido, debe tener al menos un caracter númerico</span>
+                    <button type="button" class="boton-entrar" onclick="registrarCuentaNueva()" id="button-cuenta-nueva">Registrar</button>
                     <a href="#" id="cambiar-2">Ya tengo una cuenta</a>
                 </form>
             </div>
@@ -89,6 +94,7 @@
                 <h1>WELT BANC</h1>
             </section>
             <section class="login">
+                <h2>Hola! <span id="nombre-usuario-pantalla">jose armando benavidez</span></h2>
                 <button class="cerrar-sesion" id="cerrar-sesion" onclick="alerta()">Cerrar Sesion</button>
             </section>
         </header>
@@ -97,24 +103,24 @@
                 <article class="card-1">
                     <h1>Consultar Saldo</h1>
                     <img src="assets/img/saldo.png" alt="">
-                    <button type="button" id="boton-Consultar" onclick="consultarSaldo()">IR -></button>
+                    <button type="button" id="boton-Consultar" onclick="consultarSaldo()">IR</button>
                 </article>
                 <article class="card-2">
                     <h1>Retirar</h1>
                     <img src="assets/img/retirar.png" alt="">
-                    <button type="button" class="botonesOpciones" id="botonRetirar" onclick="mostrarRetirar()">IR -></button>
+                    <button type="button" class="botonesOpciones" id="botonRetirar" onclick="mostrarRetirar()">IR</button>
                 </article>
             </section>
             <section class="segunda-fila">
                 <article class="card-1">
                     <h1>Transferir</h1>
                     <img src="assets/img/transferir.png" alt="">
-                    <button type="button" class="botonesOpciones" onclick="mostrarTransferir()">IR -></button>
+                    <button type="button" class="botonesOpciones" onclick="mostrarTransferir()">IR</button>
                 </article>
                 <article class="card-2">
                     <h1>Consignar</h1>
                     <img src="assets/img/ahorrar.png" alt="">
-                    <button type="button" class="botonesOpciones" onclick="mostrarConsignar()">IR -></button>
+                    <button type="button" class="botonesOpciones" onclick="mostrarConsignar()">IR</button>
                 </article>
             </section>
         </section>
@@ -127,16 +133,13 @@
                 <section class="contenedor-saldo-movimientos">
                     <h1>Saldo y Movimientos</h1>
                     <h3>Saldo Disponible</h3>
-                    <h2>100000</h2>
-                    <div class="historial">
-                        <article class="historial-1">
-                            <p>hola</p>
-                            <p>hola</p>
-                            <p>hola</p>
-                            <p>hola</p>
-                            <p>hola</p>
-                            <p>hola</p>
-                        </article>
+                    <h2 id="saldo">0</h2>
+                    <div class="historial" id="historial-movimientos">
+                        <!-- <article class="historial-1">
+                            <p>Fecha</p>
+                            <p>Movimiento</p>
+                            <p>Valor</p>
+                        </article> -->
                     </div>
                 </section>
             </div>
@@ -150,14 +153,40 @@
                 <img src="assets/img/retirar-color.png" alt="logo-retirar">
                 <section class="contenedor-retiros">
                     <h1>Retiros</h1>
-                    <input type="text" placeholder="Ingrese El Valor A Retirar">
-                    <input type="password" placeholder="Ingrese Su Contraseña">
-                    <button type="button">Retirar</button>
+                    <input type="text" placeholder="Ingrese El Valor A Retirar" id="valor-a-retirar">
+                    <input type="password" placeholder="Ingrese Su Contraseña" id="contraseña-retirar">
+                    <button type="button" onclick="retirarDinero()">Retirar</button>
                 </section>
             </div>
         </div>
         <button class="boton-volver" onclick="volver()">VOLVER</button>
     </aside>
+
+    <article class="retiro-exitoso" style="display: none;">
+        <div class="imagen-datos-retiro">
+            <img src="assets/img/aceptada.png" alt="logo-exito">
+            <h1>RETIRO EXITOSO</h1>
+            <div class="contenedor-datos-retiro">
+                <div class="dato">
+                    <h3>numero de comprobante</h3>
+                    <p id="comprobante-retiro">7777</p>
+                </div>
+                <!-- <div class="dato">
+                    <h3>numero de cuenta</h3>
+                    <p id="numero-cuenta-retiro">159753</p>
+                </div> -->
+                <div class="dato">
+                    <h3>Total retirado</h3>
+                    <p id="total-retirado">7000000</p>
+                </div>
+                <div class="dato">
+                    <h3>fecha de la transaccion</h3>
+                    <p id="fecha-retiro">hoy</p>
+                </div>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </article>
 
     <aside class="contenedor-transferir" style="display: none;">
         <div class="container-transferir">
@@ -165,17 +194,47 @@
                 <img src="assets/img/transferir-color.png" alt="logo-transferir">
                 <section class="contenedor-transferencias">
                     <h1>Transferencias</h1>
-                    <input type="text" placeholder="Nombre de la persona que recibe">
-                    <input type="email" placeholder="correo de quien recibe">
-                    <input type="text" placeholder="Numero de cuenta">
-                    <input type="text" placeholder="Total a transferir">
-                    <input type="password" placeholder="Ingrese Su Contraseña">
-                    <button type="button">Transferir</button>
+                    <input type="text" placeholder="Nombre de la persona que recibe" id="destinatario">
+                    <input type="email" placeholder="correo de quien recibe" id="correo-destinatario">
+                    <input type="text" placeholder="Numero de cuenta" id="cuenta-destinatario">
+                    <input type="text" placeholder="Total a transferir" id="total-transferir">
+                    <input type="password" placeholder="Ingrese Su Contraseña" id="contraseña-transferir">
+                    <button type="button" onclick="transferirDinero()">Transferir</button>
                 </section>
             </div>
         </div>
         <button class="boton-volver" onclick="volver()">VOLVER</button>
     </aside>
+
+    <article class="transferencia-exitosa" style="display: none;">
+        <div class="imagen-datos-transferencia">
+            <img src="assets/img/aceptada.png" alt="logo-exito">
+            <h1>TRANSFERENCIA EXITOSA</h1>
+            <div class="contenedor-datos-transferencia">
+                <div class="dato">
+                    <h3>numero de comprobante</h3>
+                    <p id="comrpobante-transferencia">7777</p>
+                </div>
+                <div class="dato">
+                    <h3>Nombre del destinatario</h3>
+                    <p id="nombre-destinatario">menganito sultano</p>
+                </div>
+                <div class="dato">
+                    <h3>numero de cuenta</h3>
+                    <p id="cuenta-a-transferir">159753</p>
+                </div>
+                <div class="dato">
+                    <h3>Valor Transferido</h3>
+                    <p id="valor-transferido">7000000</p>
+                </div>
+                <div class="dato">
+                    <h3>fecha de la transaccion</h3>
+                    <p id="fecha-transferencia">hoy</p>
+                </div>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </article>
 
     <aside class="contenedor-consignar" style="display: none;">
         <div class="container-consignar">
@@ -183,18 +242,44 @@
                 <img src="assets/img/ahorrar-color.png" alt="logo-consignar">
                 <section class="contenedor-consignaciones">
                     <h1>Consignaciones</h1>
-                    <input type="text" placeholder="Numero de cuenta">
+                    <input type="text" placeholder="Numero de cuenta" id="numero-cuenta-consignar">
                     <select name="tipo de cuenta" id="tipocuenta">
                         <option value="Ahorros">Ahorros</option>
                         <option value="Corriente">Corriente</option>
                     </select>
-                    <input type="text" placeholder="Valor a consignar">
-                    <button type="button">Consignar</button>
+                    <input type="text" placeholder="Valor a consignar" id="valor-consignar">
+                    <button type="button" onclick="consignarDinero()">Consignar</button>
                 </section>
             </div>
         </div>
         <button class="boton-volver" onclick="volver()">VOLVER</button>
     </aside>
+
+    <article class="consignacion-exitosa" style="display: none;">
+        <div class="imagen-datos">
+            <img src="assets/img/aceptada.png" alt="logo-exito">
+            <h1>CONSIGNACION EXITOSA</h1>
+            <div class="contenedor-datos">
+                <div class="dato">
+                    <h3>numero de comprobante</h3>
+                    <p id="comprobante-consignacion">7777</p>
+                </div>
+                <div class="dato">
+                    <h3>numero de cuenta</h3>
+                    <p id="numero-cuenta-consignada">159753</p>
+                </div>
+                <div class="dato">
+                    <h3>Valor consignado</h3>
+                    <p id="valor-consignado">7000000</p>
+                </div>
+                <div class="dato">
+                    <h3>fecha de la transaccion</h3>
+                    <p id="fecha-consignacion">hoy</p>
+                </div>
+            </div>
+        </div>
+        <button class="boton-volver" onclick="volver()">VOLVER</button>
+    </article>
 
     <article class="contenedor-loading" style="display: none;">
         <div class="wrapper">
