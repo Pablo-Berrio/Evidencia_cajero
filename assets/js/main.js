@@ -57,6 +57,37 @@ cambiar2.addEventListener("click", () => {
 })
 
 
+/*-----FUNCION PARA REGISTRAR UNA NUEVA CUENTA-----*/
+let dataBaseCuentas = []
+let nuevaCuentaRegistrada = {}
+
+const registrarCuenta = () => {
+    let numeroDeCuenta = document.getElementById("cuenta-nueva").value
+    let nombresNuevoUsuario = document.getElementById("input-usuario-nuevo").value
+    let contraseñaNuevoUsuario = document.getElementById("password-nuevo").value
+    let confirmacionContraseñaNuevoUsuario = document.getElementById("confirmacion-password-nuevo").value
+    let saldoInicialNuevoUsuario = document.getElementById("saldo-inicial-nuevo").value
+
+    nuevaCuentaRegistrada = {
+        numero: numeroDeCuenta,
+        nombreUsuarioNuevo: nombresNuevoUsuario, 
+        contraseñaUsuarioNuevo: contraseñaNuevoUsuario,
+        confirmacion: confirmacionContraseñaNuevoUsuario,
+        saldoUsuarioNuevo: saldoInicialNuevoUsuario
+    }
+
+    if (contraseñaNuevoUsuario === confirmacionContraseñaNuevoUsuario & parseInt(saldoInicialNuevoUsuario) >= 100000) {
+        dataBaseCuentas.push(nuevaCuentaRegistrada)
+        alert("cuenta registrada exitosamente")
+        limpiarInput()
+        console.log(dataBaseCuentas)
+    } else {
+        alert("fallaste en algo")
+    }
+
+}
+
+
 /*-----VISTAS-----*/
 var vista1 = document.getElementsByClassName("contenedor-principal")[0]
 var vista2 = document.getElementsByClassName("contenedor-principal-2")[0]
@@ -81,6 +112,7 @@ function validarInicioDeSesion() {
     const cuenta = document.getElementById("cuenta").value
     const user = document.getElementById("input-usuario").value;
     const password = document.getElementById("password").value;
+    // dataBaseCuentas.indexOf(cuenta)!==-1
 
     if (user === "juan pablo" && password === "12345" && cuenta === "3225108713") {
         loading.style.display = "block"
@@ -368,3 +400,10 @@ function transferirDinero(){
 }
 
 
+const validarUsuario = /^([A-Za-z0-9]){4,20}$/gm;
+const validarClave = /^-?\d+\.?\d*$/m;
+const ValidarCuenta = /^\d{5,15}$/;
+const validarNumeros = /^-?\d+\.?\d*$/m;
+const validarCorreo = /^[a-zA-Z0-9.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
+const validarNombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+const validarDinero = /^$[0-9]{1,3}([\\.][0-9]{3})/;
