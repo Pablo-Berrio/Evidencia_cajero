@@ -51,18 +51,18 @@
     <section class="registro-cuenta" style="display: none;">
         <section class="contenedor-principal">
             <div class="contenedor-formulario">
-                <form action="#">
+                <form action="#" id="form-registro">
                     <h1>Registrar Cuenta</h1>
-                    <input type="text" placeholder="Numero De Cuenta" id="cuenta-nueva">
-                    <span class="error_cuenta_nueva" id="error-cuenta-nueva">Número de cuenta invalido, debe tener 11 caracteres númericos</span>
-                    <input type="text" placeholder="Nombres de usuario" id="input-usuario-nuevo">
-                    <span class="error_usuario_nuevo" id="error-usuario-nuevo">Nombre de usuario invalido</span>
-                    <input type="password"  id="password-nuevo" placeholder="Contraseña">
-                    <span class="error_clave_nueva" id="error-clave-nueva">Contraseña invalida, debe tener 4 caracteres númericos</span>
-                    <input type="password" name="password" id="confirmacion-password-nuevo" placeholder="Confirmar Contraseña">
-                    <span class="confirmacion_clave" id="confirmacion-clave">Las claves no coinciden</span>
-                    <input type="text" placeholder="Saldo Inicial" id="saldo-inicial-nuevo">
-                    <span class="error_saldo_inicial" id="error-saldo-inicial">Saldo invalido, debe tener al menos un caracter númerico</span>
+                    <input type="text" placeholder="Numero De Cuenta" id="cuenta-nueva" name="numeroCntaRgstr">
+                    <span id="error-cuenta-nueva" for=""></span>
+                    <input type="text" placeholder="Nombres de usuario" id="input-usuario-nuevo" name="nombresRegistro">
+                    <span  id="error-usuario-nuevo" for=""></span>
+                    <input type="password"  id="password-nuevo" placeholder="Contraseña" name="contraseña">
+                    <span  id="error-clave-nueva"></span>
+                    <input type="password" name="password" id="confirmacion-password-nuevo" placeholder="Confirmar Contraseña" name="verificacion">
+                    <span  id="confirmacion-clave"></span>
+                    <input type="text" placeholder="Saldo Inicial" id="saldo-inicial-nuevo" name="saldo-inicial">
+                    <span  id="error-saldo-inicial"></span>
                     <button type="button" class="boton-entrar" onclick="registrarCuenta()" id="button-cuenta-nueva">Registrar</button>
                     <a href="#" id="cambiar-2">Ya tengo una cuenta</a>
                 </form>
@@ -133,7 +133,7 @@
                 <section class="contenedor-saldo-movimientos">
                     <h1>Saldo y Movimientos</h1>
                     <h3>Saldo Disponible</h3>
-                    <h2 id="saldo">0</h2>
+                    <h2 id="saldoActualizado">0</h2>
                     <div class="historial" id="historial-movimientos">
                         <!-- <article class="historial-1">
                             <p>Fecha</p>
@@ -153,9 +153,11 @@
                 <img src="assets/img/retirar-color.png" alt="logo-retirar">
                 <section class="contenedor-retiros">
                     <h1>Retiros</h1>
-                    <input type="text" placeholder="Ingrese El Valor A Retirar" id="valor-a-retirar">
-                    <input type="password" placeholder="Ingrese Su Contraseña" id="contraseña-retirar">
-                    <button type="button" onclick="retirarDinero()">Retirar</button>
+                    <input type="text" placeholder="Ingrese El Valor A Retirar" id="valor-a-retirar" name="valor-retirar">
+                    <span id="error-valor-retirar"></span>
+                    <input type="password" placeholder="Ingrese Su Contraseña" id="contraseña-retirar" name="contraseña-retirar">
+                    <span id="error-contraseña-retirar"></span>
+                    <button type="button" onclick="retirarDinero()" id="boton-retirar">Retirar</button>
                 </section>
             </div>
         </div>
@@ -194,12 +196,17 @@
                 <img src="assets/img/transferir-color.png" alt="logo-transferir">
                 <section class="contenedor-transferencias">
                     <h1>Transferencias</h1>
-                    <input type="text" placeholder="Nombre de la persona que recibe" id="destinatario">
-                    <input type="email" placeholder="correo de quien recibe" id="correo-destinatario">
-                    <input type="text" placeholder="Numero de cuenta" id="cuenta-destinatario">
-                    <input type="text" placeholder="Total a transferir" id="total-transferir">
-                    <input type="password" placeholder="Ingrese Su Contraseña" id="contraseña-transferir">
-                    <button type="button" onclick="transferirDinero()">Transferir</button>
+                    <input type="text" placeholder="Nombre de la persona que recibe" id="destinatario" name="nombre-destinatario">
+                    <span id="error-nombre-destinatario"></span>
+                    <input type="email" placeholder="correo de quien recibe" id="correo-destinatario" name="correo">
+                    <span id="error-correo"></span>
+                    <input type="text" placeholder="Numero de cuenta" id="cuenta-destinatario" name="cuenta-destino">
+                    <span id="error-cuenta-destinatario"></span>
+                    <input type="number" placeholder="Total a transferir" id="total-transferir" name="monto-transferir">
+                    <span id="error-valor-transferir"></span>
+                    <input type="password" placeholder="Ingrese Su Contraseña" id="contraseña-transferir" name="clave-transferir">
+                    <span id="error-contraseña-transferir"></span>
+                    <button type="button" onclick="transferirDinero()" id="boton-transferir">Transferir</button>
                 </section>
             </div>
         </div>
@@ -242,13 +249,13 @@
                 <img src="assets/img/ahorrar-color.png" alt="logo-consignar">
                 <section class="contenedor-consignaciones">
                     <h1>Consignaciones</h1>
-                    <input type="text" placeholder="Numero de cuenta" id="numero-cuenta-consignar">
                     <select name="tipo de cuenta" id="tipocuenta">
                         <option value="Ahorros">Ahorros</option>
                         <option value="Corriente">Corriente</option>
                     </select>
-                    <input type="text" placeholder="Valor a consignar" id="valor-consignar">
-                    <button type="button" onclick="consignarDinero()">Consignar</button>
+                    <input type="text" placeholder="Valor a consignar" id="valor-consignar" name="valor-consignar">
+                    <span id="error-valor-consignar"></span>
+                    <button type="button" onclick="consignarDinero()" id="boton-consignar">Consignar</button>
                 </section>
             </div>
         </div>

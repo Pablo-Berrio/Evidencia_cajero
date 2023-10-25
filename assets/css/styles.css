@@ -1210,58 +1210,6 @@ main{
     }
   }
 
-  .error_cuenta_nueva {
-    color: red;
-    display: none;
-  }
-
-  .error_usuario_nuevo {
-    color: red;
-    display: none;
-  }
-
-  .confirmacion_clave {
-    color: red;
-    display: none;
-  }
-
-  .error_clave_nueva {
-    color: red;
-    display: none;
-  }
-
-  .error_saldo_inicial {
-    color: red;
-    display: none;
-  }
-
-  .cuenta_nueva {
-    border: 2px solid red;
-  }
-
-  .usuario_nuevo {
-    border: 2px solid red;
-  }
-
-  .clave_nueva {
-    border: 2px solid red;
-  }
-
-  .confirmacion_clave_nueva {
-    border: 2px solid red;
-  }
-
-  .saldo_inicial {
-    border: 2px solid red;
-  }
-
-  .alerta_cantidad {
-    border: 2px solid red;
-  }
-  form input [type="button"]{
-    width: 100px;
-    cursor: pointer;
-    }
-    .ancho{
-      width: 270px;
-  }
+.error{
+  color:red;
+}
