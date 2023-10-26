@@ -7,7 +7,7 @@ const validarTodo = (e) => {
     const regexClave = /^\d{4}$/  //exactamente 4 numeros
     const regexSaldo = /^\d{6,}$/ //MINIMO 6 NUMEROS
     const regexValorConsignar = /^[1-9]\d{4,}$/  //solo numeros mayores a 10000
-    const regexCorreo=  /^[a-zA-Z0-9.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/
+    const regexCorreo = /^[a-zA-Z0-9.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/
     const errorNombreUsuario = document.getElementById("error-usuario-nuevo")
     const errorNumeroCuenta = document.getElementById("error-cuenta-nueva")
     const errorClave = document.getElementById("error-clave-nueva")
@@ -15,13 +15,13 @@ const validarTodo = (e) => {
     const errorSaldo = document.getElementById("error-saldo-inicial")
     const errorCuentaConsignar = document.getElementById("error-cuenta-consignar")
     const errorValorConsignar = document.getElementById("error-valor-consignar")
-    const errorValorRetirar=document.getElementById("error-valor-retirar")
-    const errorContraseñaRetirar=document.getElementById("error-contraseña-retirar")
-    const errorNombreDestinatario=document.getElementById("error-nombre-destinatario")
-    const errorCorreo=document.getElementById("error-correo")
-    const errorCuentaDestinatario=document.getElementById("error-cuenta-destinatario")
-    const errorValorTransferir=document.getElementById("error-valor-transferir")
-    const errorContraseñaTransferir=document.getElementById("error-contraseña-transferir")
+    const errorValorRetirar = document.getElementById("error-valor-retirar")
+    const errorContraseñaRetirar = document.getElementById("error-contraseña-retirar")
+    const errorNombreDestinatario = document.getElementById("error-nombre-destinatario")
+    const errorCorreo = document.getElementById("error-correo")
+    const errorCuentaDestinatario = document.getElementById("error-cuenta-destinatario")
+    const errorValorTransferir = document.getElementById("error-valor-transferir")
+    const errorContraseñaTransferir = document.getElementById("error-contraseña-transferir")
 
 
     switch (e.target.name) {
@@ -108,87 +108,87 @@ const validarTodo = (e) => {
                 errorValorConsignar.classList.remove("error")
                 document.getElementById("boton-consignar").disabled = false
             } else {
-                errorValorConsignar.textContent="el valor minimo de consignacion debe ser de 10000"
+                errorValorConsignar.textContent = "el valor minimo de consignacion debe ser de 10000"
                 errorValorConsignar.classList.add("error")
                 document.getElementById("boton-consignar").disabled = true
             }
             break
         case "valor-retirar":
-            if(regexValorConsignar.test(e.target.value)){
-                errorValorRetirar.textContent=""
+            if (regexValorConsignar.test(e.target.value)) {
+                errorValorRetirar.textContent = ""
                 errorValorRetirar.classList.remove("error")
-                document.getElementById("boton-retirar").disabled=false
-            }else{
-                errorValorRetirar.textContent="el valor minimo para realizar un retiro es de 10000"
+                document.getElementById("boton-retirar").disabled = false
+            } else {
+                errorValorRetirar.textContent = "el valor minimo para realizar un retiro es de 10000"
                 errorValorRetirar.classList.add("error")
-                document.getElementById("boton-retirar").disabled=true
+                document.getElementById("boton-retirar").disabled = true
             }
             break
         case "contraseña-retirar":
-            if(regexClave.test(e.target.value)){
-                errorContraseñaRetirar.textContent=""
+            if (regexClave.test(e.target.value)) {
+                errorContraseñaRetirar.textContent = ""
                 errorContraseñaRetirar.classList.remove("error")
-                document.getElementById("boton-retirar").disabled=false
-            }else{
-                errorContraseñaRetirar.textContent="tu contraseña no coincide"
+                document.getElementById("boton-retirar").disabled = false
+            } else {
+                errorContraseñaRetirar.textContent = "tu contraseña no coincide"
                 errorContraseñaRetirar.classList.add("error")
-                document.getElementById("boton-retirar").disabled=true
+                document.getElementById("boton-retirar").disabled = true
             }
             break
         case "nombre-destinatario":
-            if(regexUsuarioRegistrar.test(e.target.value)){
-                errorNombreDestinatario.textContent=""
+            if (regexUsuarioRegistrar.test(e.target.value)) {
+                errorNombreDestinatario.textContent = ""
                 errorNombreDestinatario.classList.remove("error")
-                document.getElementById("boton-transferir").disabled=false
-            }else{
-                errorNombreDestinatario.textContent="el nombre de usuario debe tener una cuenta activa en WELT BANC "
+                document.getElementById("boton-transferir").disabled = false
+            } else {
+                errorNombreDestinatario.textContent = "el nombre de usuario debe tener una cuenta activa en WELT BANC "
                 errorNombreDestinatario.classList.add("error")
-                document.getElementById("boton-transferir").disabled=true
+                document.getElementById("boton-transferir").disabled = true
             }
             break
         case "correo":
-            if(regexCorreo.test(e.target.value)){
-                errorCorreo.textContent=""
+            if (regexCorreo.test(e.target.value)) {
+                errorCorreo.textContent = ""
                 errorCorreo.classList.remove("error")
-                document.getElementById("boton-transferir").disabled=false
-            }else{
-                errorCorreo.textContent="debes ingresar un correo valida como ejemplo@dominio.com"
+                document.getElementById("boton-transferir").disabled = false
+            } else {
+                errorCorreo.textContent = "debes ingresar un correo valida como ejemplo@dominio.com"
                 errorCorreo.classList.add("error")
-                document.getElementById("boton-transferir").disabled=true
+                document.getElementById("boton-transferir").disabled = true
             }
             break
         case "cuenta-destino":
-            if(regexNumeroCuentaRegistrar.test(e.target.value)){
-                errorCuentaDestinatario.textContent=""
+            if (regexNumeroCuentaRegistrar.test(e.target.value)) {
+                errorCuentaDestinatario.textContent = ""
                 errorCuentaDestinatario.classList.remove("error")
-                document.getElementById("boton-transferir").disabled=false
-            }else{
-                errorCuentaDestinatario.textContent="la cuenta a la que vas a transferir dinero debe estar activa en WELT BANC"
+                document.getElementById("boton-transferir").disabled = false
+            } else {
+                errorCuentaDestinatario.textContent = "la cuenta a la que vas a transferir dinero debe estar activa en WELT BANC"
                 errorCuentaDestinatario.classList.add("error")
-                document.getElementById("boton-transferir").disabled=true
+                document.getElementById("boton-transferir").disabled = true
             }
             break
         case "monto-transferir":
             const valor = e.target.valueAsNumber
-            if(valor>=10000){
-                errorValorTransferir.textContent=""
+            if (valor >= 10000) {
+                errorValorTransferir.textContent = ""
                 errorValorTransferir.classList.remove("error")
-                document.getElementById("boton-transferir").disabled=false
-            }else{
-                errorValorTransferir.textContent="el valor minimo para transferir son 10000"
+                document.getElementById("boton-transferir").disabled = false
+            } else {
+                errorValorTransferir.textContent = "el valor minimo para transferir son 10000"
                 errorValorTransferir.classList.add("error")
-                document.getElementById("boton-transferir").disabled=true
+                document.getElementById("boton-transferir").disabled = true
             }
             break
         case "clave-transferir":
-            if(regexClave.test(e.target.value)){
-                errorContraseñaTransferir.textContent=""
+            if (regexClave.test(e.target.value)) {
+                errorContraseñaTransferir.textContent = ""
                 errorContraseñaTransferir.classList.remove("error")
-                document.getElementById("boton-transferir").disabled=false
-            }else{
-                errorContraseñaTransferir.textContent="contraseña incorrecta"
+                document.getElementById("boton-transferir").disabled = false
+            } else {
+                errorContraseñaTransferir.textContent = "contraseña incorrecta"
                 errorContraseñaTransferir.classList.add("error")
-                document.getElementById("boton-transferir").disabled=true
+                document.getElementById("boton-transferir").disabled = true
             }
             break
     }
@@ -269,15 +269,8 @@ const registrarCuenta = () => {
     let nombresNuevoUsuario = document.getElementById("input-usuario-nuevo").value
     let contraseñaNuevoUsuario = document.getElementById("password-nuevo").value
     let confirmacionContraseñaNuevoUsuario = document.getElementById("confirmacion-password-nuevo").value
-    let saldoInicialNuevoUsuario = Number(document.getElementById("saldo-inicial-nuevo").value)
+    let saldoInicialNuevoUsuario = parseInt(document.getElementById("saldo-inicial-nuevo").value)
 
-    nuevaCuentaRegistrada = {
-        numero: numeroDeCuenta,
-        nombreUsuario: nombresNuevoUsuario,
-        contraseña: contraseñaNuevoUsuario,
-        saldo: saldoInicialNuevoUsuario,
-        saldoActualizado: saldoInicialNuevoUsuario,
-    }
 
     if (contraseñaNuevoUsuario === confirmacionContraseñaNuevoUsuario &&
         parseInt(saldoInicialNuevoUsuario) >= 100000 &&
@@ -287,8 +280,15 @@ const registrarCuenta = () => {
         confirmacionContraseñaNuevoUsuario !== "" &&
         saldoInicialNuevoUsuario !== ""
     ) {
+
+        nuevaCuentaRegistrada = {
+            numeroCuenta: numeroDeCuenta,
+            nombreUsuario: nombresNuevoUsuario,
+            contraseña: contraseñaNuevoUsuario,
+            saldo: saldoInicialNuevoUsuario,
+        }
+
         dataBaseCuentas.push(nuevaCuentaRegistrada)
-        console.log(nuevaCuentaRegistrada)
         alert("cuenta registrada exitosamente")
         limpiarInput()
         console.log(dataBaseCuentas)
@@ -323,9 +323,16 @@ function validarInicioDeSesion() {
     const cuenta = document.getElementById("cuenta").value
     const user = document.getElementById("input-usuario").value;
     const password = document.getElementById("password").value;
-    const loginExitoso = dataBaseCuentas.some(usuarioRegistrado => user === usuarioRegistrado.nombreUsuario && password === usuarioRegistrado.contraseña && cuenta === usuarioRegistrado.numero)
+    // const loginExitoso = dataBaseCuentas.some(usuarioRegistrado => user === usuarioRegistrado.nombreUsuario && password === usuarioRegistrado.contraseña && cuenta === usuarioRegistrado.numero)
+    const usuarioEncontrado = dataBaseCuentas.find((dataBase) => {
+        return (
+            dataBase.numeroCuenta === cuenta &&
+            dataBase.nombreUsuario === user &&
+            dataBase.contraseña === password
+        )
+    })
 
-    if (loginExitoso) {
+    if (usuarioEncontrado) {
         loading.style.display = "block"
         inicio.style.display = "none"
         registro.style.display = "none"
@@ -336,8 +343,10 @@ function validarInicioDeSesion() {
             loading.style.display = "none"
             inicio.style.display = "none"
             registro.style.display = "none"
-            var saldoActualizado = document.getElementById("saldoActualizado").textContent = Number(nuevaCuentaRegistrada.saldoActualizado)
-
+            let identificarUsuarioActual = document.getElementById("cuenta").value;
+            let usuarioActual = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === identificarUsuarioActual)
+            document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
+            console.log(usuarioActual)
         }, 2000)
 
     } else {
@@ -492,20 +501,20 @@ function alerta() {
 /*-----FUNCIONALIDAD DE LA APLICACION-----*/
 
 var comprobante = 14129
-var saldo = Number(nuevaCuentaRegistrada.saldoActualizado)
+
 
 /*-----FUNCION PARA CONSIGNAR DINERO-----*/
 function consignarDinero() {
-    let valorConsignar = Number(document.getElementById("valor-consignar").value);
+    let valorConsignar = Number(document.getElementById("valor-consignar").value)
     let historial = document.getElementById("historial-movimientos")
+    let identificarUsuarioActual = document.getElementById("cuenta").value;
+    let usuarioActual = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === identificarUsuarioActual)
 
-    if ( valorConsignar >= 10000) {
+    if (valorConsignar >= 10000) {
         comprobante++
-        let consignacion = nuevaCuentaRegistrada.saldoActualizado + valorConsignar
-        console.log("consignacion " + consignacion)
-        nuevaCuentaRegistrada.saldoActualizado = consignacion
-        console.log(nuevaCuentaRegistrada.saldoActualizado + "cuenta con saldo actualizado")
-        document.getElementById("saldoActualizado").textContent = consignacion
+        usuarioActual.saldo= (parseInt(usuarioActual.saldo))+parseInt(valorConsignar)
+        console.log("consignacion " + usuarioActual.saldo)
+        document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
         document.getElementById("comprobante-consignacion").textContent = comprobante
         document.getElementById("valor-consignado").textContent = parseInt(document.getElementById("valor-consignar").value)
         document.getElementById("numero-cuenta-consignada").textContent = "Cuenta Propia"
@@ -534,58 +543,66 @@ function consignarDinero() {
 
 /*-----FUNCION PARA RETIRAR DINERO-----*/
 function retirarDinero() {
-    let valorRetirar = parseInt(document.getElementById("valor-a-retirar").value)
-    let contraseñaRetirar = document.getElementById("contraseña-retirar").value
-    let historial = document.getElementById("historial-movimientos")
-    const encontrarContraseña=dataBaseCuentas.some(usuarioRegistrado=>contraseñaRetirar===usuarioRegistrado.contraseña)
+    let historial = document.getElementById("historial-movimientos");
+    let valorRetirar = parseInt(document.getElementById("valor-a-retirar").value);
+    let contraseñaRetirar = document.getElementById("contraseña-retirar").value;
+    let identificarUsuarioActual = document.getElementById("cuenta").value;
+    let usuarioActual = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === identificarUsuarioActual)
+    console.log(usuarioActual.saldo)
+    
+        if (valorRetirar >= 10000 && valorRetirar <= usuarioActual.saldo && contraseñaRetirar === usuarioActual.contraseña) {
+            usuarioActual.saldo -= valorRetirar;
+            comprobante++;
+            document.getElementById("saldoActualizado").textContent = usuarioActual.saldo;
+            document.getElementById("comprobante-retiro").textContent = comprobante;
+            document.getElementById("total-retirado").textContent = valorRetirar;
+            document.getElementById("fecha-retiro").textContent = new Date().toLocaleString();
 
-    if (valorRetirar > 10000 && valorRetirar <= nuevaCuentaRegistrada.saldoActualizado && encontrarContraseña ) {
-        let retiracion = nuevaCuentaRegistrada.saldoActualizado - valorRetirar
-        nuevaCuentaRegistrada.saldoActualizado = retiracion
-        document.getElementById("saldoActualizado").textContent = retiracion
+            let fechaConsignacionHistorial = document.createElement("p");
+            fechaConsignacionHistorial.textContent = new Date().toLocaleString();
+            let tipoDeMovimiento = document.createElement("p");
+            tipoDeMovimiento.textContent = "Retiro En Cajero";
+            let valorMovimiento = document.createElement("p");
+            valorMovimiento.textContent = "$ -" + valorRetirar;
+            valorMovimiento.style.color = "red";
 
-        comprobante++
+            let movimiento = document.createElement("article");
+            movimiento.append(fechaConsignacionHistorial, tipoDeMovimiento, valorMovimiento);
+            historial.append(movimiento);
+            retiroExitoso();
+        } else {
+            alert("Valor o contraseña incorrectos");
+        }
 
-        document.getElementById("comprobante-retiro").textContent = comprobante
-        document.getElementById("total-retirado").textContent = valorRetirar
-        document.getElementById("fecha-retiro").textContent = new Date().toLocaleString()
-
-        let fechaConsignacionHistorial = document.createElement("p")
-        fechaConsignacionHistorial.textContent = new Date().toLocaleString()
-        let tipoDeMovimiento = document.createElement("p")
-        tipoDeMovimiento.textContent = "Retiro En Cajero"
-        let valorMovimiento = document.createElement("p")
-        valorMovimiento.textContent = "$ -" + valorRetirar
-        valorMovimiento.style.color = "red"
-
-        let movimiento = document.createElement("article")
-        movimiento.append(fechaConsignacionHistorial, tipoDeMovimiento, valorMovimiento)
-        historial.append(movimiento)
-        retiroExitoso()
-    } else {
-        alert("valor o contraseña incorrectos")
-    }
-
-    limpiarInput()
+        limpiarInput();
+    
 }
+
+
+
 
 
 /*-----FUNCION PARA TRANSFERIR DINERO-----*/
 function transferirDinero() {
+    let historial = document.getElementById("historial-movimientos")
     let valorTransferir = parseInt(document.getElementById("total-transferir").value)
     let nombreDestinatario = document.getElementById("destinatario").value
     let nCuentaDestinatario = document.getElementById("cuenta-destinatario").value
     let contraseñaTransferir = document.getElementById("contraseña-transferir").value
-    let historial = document.getElementById("historial-movimientos")
+    let buscarCuentaOrigen = document.getElementById("cuenta").value
+    let cuentaOrigen = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === buscarCuentaOrigen)
+    let cuentaDestino = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === nCuentaDestinatario)
+    let claveCorrecta = dataBaseCuentas.find((dataBase) => dataBase.contraseña === contraseñaTransferir)
 
-    const encontrarCuenta=dataBaseCuentas.some(usuarioRegistrado=>nCuentaDestinatario===usuarioRegistrado.numero)
-    const encontrarContraseña=dataBaseCuentas.some(usuarioRegistrado=>contraseñaTransferir===usuarioRegistrado.contraseña)
+    // const encontrarCuenta=dataBaseCuentas.some(usuarioRegistrado=>nCuentaDestinatario===usuarioRegistrado.numero)
+    // const encontrarContraseña=dataBaseCuentas.some(usuarioRegistrado=>contraseñaTransferir===usuarioRegistrado.contraseña)
 
-    if (valorTransferir > 10000 && valorTransferir <= nuevaCuentaRegistrada.saldoActualizado && encontrarCuenta && encontrarContraseña) {
-        let transferencia = nuevaCuentaRegistrada.saldoActualizado - valorTransferir
-        nuevaCuentaRegistrada.saldoActualizado = transferencia
-        document.getElementById("saldoActualizado").textContent = transferencia
-        document.getElementById("comrpobante-transferencia").textContent = comprobante
+    if ( cuentaDestino && claveCorrecta && valorTransferir >= 10000 && valorTransferir <= parseInt(cuentaOrigen.saldo)) {
+        cuentaOrigen.saldo -= valorTransferir
+        cuentaDestino.saldo = Number(cuentaDestino.saldo) + Number(valorTransferir)
+        comprobante++
+        document.getElementById("saldoActualizado").textContent = cuentaOrigen.saldo
+        // document.getElementById("comprobante-transferencia").textContent = 14130
         document.getElementById("nombre-destinatario").textContent = nombreDestinatario
         document.getElementById("cuenta-a-transferir").textContent = nCuentaDestinatario
         document.getElementById("valor-transferido").textContent = valorTransferir
