@@ -1,6 +1,4 @@
 /*-----VALIDACIONES-----*/
-
-
 const validarTodo = (e) => {
     const regexNumeroCuentaRegistrar = /^\d{11}$/  //exactamente 11 numeros
     const regexUsuarioRegistrar = /^(?=\D*\d)(?=[^ ]{4,12}$)[A-Za-z0-9]+$/  //minimo 4 letras y minimo un numero sin espacios
@@ -263,6 +261,8 @@ cambiar2.addEventListener("click", () => {
 /*-----FUNCION PARA REGISTRAR UNA NUEVA CUENTA-----*/
 let dataBaseCuentas = []
 let nuevaCuentaRegistrada = {}
+var estaLogeado= false
+var usuarioActual= {}
 
 const registrarCuenta = () => {
     let numeroDeCuenta = document.getElementById("cuenta-nueva").value
@@ -323,7 +323,6 @@ function validarInicioDeSesion() {
     const cuenta = document.getElementById("cuenta").value
     const user = document.getElementById("input-usuario").value;
     const password = document.getElementById("password").value;
-    // const loginExitoso = dataBaseCuentas.some(usuarioRegistrado => user === usuarioRegistrado.nombreUsuario && password === usuarioRegistrado.contraseña && cuenta === usuarioRegistrado.numero)
     const usuarioEncontrado = dataBaseCuentas.find((dataBase) => {
         return (
             dataBase.numeroCuenta === cuenta &&
@@ -343,10 +342,10 @@ function validarInicioDeSesion() {
             loading.style.display = "none"
             inicio.style.display = "none"
             registro.style.display = "none"
-            let identificarUsuarioActual = document.getElementById("cuenta").value;
-            let usuarioActual = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === identificarUsuarioActual)
+            usuarioActual=usuarioEncontrado
             document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
             console.log(usuarioActual)
+            estaLogeado=true
         }, 2000)
 
     } else {
@@ -493,13 +492,35 @@ function limpiarInput() {
 function alerta() {
     var opcion = confirm("¿ Estas seguro que quieres Cerrar Sesión ?");
     if (opcion == true) {
-        location.reload();
+        loading.style.display = "block"
+        vistaPrincipal.style.display = "none"
+        consultar.style.display = "none"
+        vistaRetirar.style.display = "none"
+        vistaTransferir.style.display = "none"
+        vistaConsignar.style.display = "none"
+        vistaConsignacionExitosa.style.display = "none"
+        vistaRetiroExitoso.style.display = "none"
+        vistaTransferenciaExitosa.style.display = "none"
+        usuarioActual={}
+        estaLogeado=false
+
+        setTimeout(function () {
+            inicio.style.display = "flex"
+            vistaPrincipal.style.display = "none"
+            consultar.style.display = "none"
+            vistaRetirar.style.display = "none"
+            vistaTransferir.style.display = "none"
+            vistaConsignar.style.display = "none"
+            loading.style.display = "none"
+            vistaConsignacionExitosa.style.display = "none"
+            vistaRetiroExitoso.style.display = "none"
+            vistaTransferenciaExitosa.style.display = "none"
+        }, 2000)
     }
 }
 
 
 /*-----FUNCIONALIDAD DE LA APLICACION-----*/
-
 var comprobante = 14129
 
 
@@ -507,12 +528,10 @@ var comprobante = 14129
 function consignarDinero() {
     let valorConsignar = Number(document.getElementById("valor-consignar").value)
     let historial = document.getElementById("historial-movimientos")
-    let identificarUsuarioActual = document.getElementById("cuenta").value;
-    let usuarioActual = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === identificarUsuarioActual)
 
     if (valorConsignar >= 10000) {
         comprobante++
-        usuarioActual.saldo= (parseInt(usuarioActual.saldo))+parseInt(valorConsignar)
+        usuarioActual.saldo = (parseInt(usuarioActual.saldo)) + parseInt(valorConsignar)
         console.log("consignacion " + usuarioActual.saldo)
         document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
         document.getElementById("comprobante-consignacion").textContent = comprobante
@@ -546,40 +565,34 @@ function retirarDinero() {
     let historial = document.getElementById("historial-movimientos");
     let valorRetirar = parseInt(document.getElementById("valor-a-retirar").value);
     let contraseñaRetirar = document.getElementById("contraseña-retirar").value;
-    let identificarUsuarioActual = document.getElementById("cuenta").value;
-    let usuarioActual = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === identificarUsuarioActual)
-    console.log(usuarioActual.saldo)
-    
-        if (valorRetirar >= 10000 && valorRetirar <= usuarioActual.saldo && contraseñaRetirar === usuarioActual.contraseña) {
-            usuarioActual.saldo -= valorRetirar;
-            comprobante++;
-            document.getElementById("saldoActualizado").textContent = usuarioActual.saldo;
-            document.getElementById("comprobante-retiro").textContent = comprobante;
-            document.getElementById("total-retirado").textContent = valorRetirar;
-            document.getElementById("fecha-retiro").textContent = new Date().toLocaleString();
 
-            let fechaConsignacionHistorial = document.createElement("p");
-            fechaConsignacionHistorial.textContent = new Date().toLocaleString();
-            let tipoDeMovimiento = document.createElement("p");
-            tipoDeMovimiento.textContent = "Retiro En Cajero";
-            let valorMovimiento = document.createElement("p");
-            valorMovimiento.textContent = "$ -" + valorRetirar;
-            valorMovimiento.style.color = "red";
+    if (valorRetirar >= 10000 && valorRetirar <= usuarioActual.saldo && contraseñaRetirar === usuarioActual.contraseña) {
+        usuarioActual.saldo -= valorRetirar;
+        comprobante++;
+        document.getElementById("saldoActualizado").textContent = usuarioActual.saldo;
+        document.getElementById("comprobante-retiro").textContent = comprobante;
+        document.getElementById("total-retirado").textContent = valorRetirar;
+        document.getElementById("fecha-retiro").textContent = new Date().toLocaleString();
 
-            let movimiento = document.createElement("article");
-            movimiento.append(fechaConsignacionHistorial, tipoDeMovimiento, valorMovimiento);
-            historial.append(movimiento);
-            retiroExitoso();
-        } else {
-            alert("Valor o contraseña incorrectos");
-        }
+        let fechaConsignacionHistorial = document.createElement("p");
+        fechaConsignacionHistorial.textContent = new Date().toLocaleString();
+        let tipoDeMovimiento = document.createElement("p");
+        tipoDeMovimiento.textContent = "Retiro En Cajero";
+        let valorMovimiento = document.createElement("p");
+        valorMovimiento.textContent = "$ -" + valorRetirar;
+        valorMovimiento.style.color = "red";
 
-        limpiarInput();
-    
+        let movimiento = document.createElement("article");
+        movimiento.append(fechaConsignacionHistorial, tipoDeMovimiento, valorMovimiento);
+        historial.append(movimiento);
+        retiroExitoso();
+    } else {
+        alert("Valor o contraseña incorrectos");
+    }
+
+    limpiarInput();
+
 }
-
-
-
 
 
 /*-----FUNCION PARA TRANSFERIR DINERO-----*/
@@ -589,20 +602,13 @@ function transferirDinero() {
     let nombreDestinatario = document.getElementById("destinatario").value
     let nCuentaDestinatario = document.getElementById("cuenta-destinatario").value
     let contraseñaTransferir = document.getElementById("contraseña-transferir").value
-    let buscarCuentaOrigen = document.getElementById("cuenta").value
-    let cuentaOrigen = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === buscarCuentaOrigen)
     let cuentaDestino = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === nCuentaDestinatario)
-    let claveCorrecta = dataBaseCuentas.find((dataBase) => dataBase.contraseña === contraseñaTransferir)
 
-    // const encontrarCuenta=dataBaseCuentas.some(usuarioRegistrado=>nCuentaDestinatario===usuarioRegistrado.numero)
-    // const encontrarContraseña=dataBaseCuentas.some(usuarioRegistrado=>contraseñaTransferir===usuarioRegistrado.contraseña)
-
-    if ( cuentaDestino && claveCorrecta && valorTransferir >= 10000 && valorTransferir <= parseInt(cuentaOrigen.saldo)) {
-        cuentaOrigen.saldo -= valorTransferir
+    if (contraseñaTransferir === usuarioActual.contraseña &&  valorTransferir >= 10000 && valorTransferir <= usuarioActual.saldo) {
+        usuarioActual.saldo -= valorTransferir
         cuentaDestino.saldo = Number(cuentaDestino.saldo) + Number(valorTransferir)
         comprobante++
-        document.getElementById("saldoActualizado").textContent = cuentaOrigen.saldo
-        // document.getElementById("comprobante-transferencia").textContent = 14130
+        document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
         document.getElementById("nombre-destinatario").textContent = nombreDestinatario
         document.getElementById("cuenta-a-transferir").textContent = nCuentaDestinatario
         document.getElementById("valor-transferido").textContent = valorTransferir
@@ -619,8 +625,6 @@ function transferirDinero() {
         let movimiento = document.createElement("article")
         movimiento.append(fechaConsignacionHistorial, tipoDeMovimiento, valorMovimiento)
         historial.append(movimiento)
-
-        alert("transferencia exitosa")
         transferenciaExitosa()
 
     } else {
