@@ -259,10 +259,10 @@ cambiar2.addEventListener("click", () => {
 
 
 /*-----FUNCION PARA REGISTRAR UNA NUEVA CUENTA-----*/
-let dataBaseCuentas = []
+var dataBaseCuentas = JSON.parse(localStorage.getItem("cliente")) || []
 let nuevaCuentaRegistrada = {}
-var estaLogeado= false
-var usuarioActual= {}
+var estaLogeado = false
+var usuarioActual = {}
 
 const registrarCuenta = () => {
     let numeroDeCuenta = document.getElementById("cuenta-nueva").value
@@ -289,7 +289,14 @@ const registrarCuenta = () => {
         }
 
         dataBaseCuentas.push(nuevaCuentaRegistrada)
-        alert("cuenta registrada exitosamente")
+        localStorage.setItem('cliente', JSON.stringify(dataBaseCuentas))
+        // alert("cuenta registrada exitosamente")
+        swal.fire({
+            title: "Cuenta registrada exitosamente, Bienvenido a WELT BANC",
+            icon: 'success',
+            confirmButtonColor: '#0A0101',
+            timer: 5000
+        })
         limpiarInput()
         console.log(dataBaseCuentas)
     } else {
@@ -342,17 +349,27 @@ function validarInicioDeSesion() {
             loading.style.display = "none"
             inicio.style.display = "none"
             registro.style.display = "none"
-            usuarioActual=usuarioEncontrado
+            usuarioActual = usuarioEncontrado
             document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
             console.log(usuarioActual)
-            estaLogeado=true
+            estaLogeado = true
         }, 2000)
 
     } else {
-        alert("usuario o contraseña incorrectos. por favor valida todos los campos y verifica que sean tus datos")
+        swal.fire({
+            title: "usuario o contraseña incorrectos. por favor valida todos los campos y verifica que sean tus datos",
+            icon: 'warning',
+            confirmButtonColor: '#0A0101',
+            timer: 5000
+        })
         contadorErrores--
         if (contadorErrores == 0) {
-            alert("has excedido el maximo de intentos para inicio de sesion, por seguridad bloquearemos tu cuenta durante las proximas 5 horas, recuerda que en WELT BANC nos preocupamos por tu seguridad")
+            swal.fire({
+                title: "has excedido el maximo de intentos para inicio de sesion, por seguridad bloquearemos tu cuenta durante las proximas 5 horas, recuerda que en WELT BANC nos preocupamos por tu seguridad",
+                icon: 'warning',
+                confirmButtonColor: '#0A0101',
+                timer: 8000
+            })
             document.querySelector("#cuenta").disabled = true
             document.querySelector("#input-usuario").disabled = true
             document.querySelector("#password").disabled = true
@@ -370,6 +387,7 @@ function consultarSaldo() {
         consultar.style.display = "flex"
         vistaPrincipal.style.display = "none"
         loading.style.display = "none"
+
     }, 2000)
 }
 
@@ -490,33 +508,48 @@ function limpiarInput() {
 
 /*-----FUNCION DE ALERTA QUE SE MUESTRA AL INTENTAR CERRAR SESION----- */
 function alerta() {
-    var opcion = confirm("¿ Estas seguro que quieres Cerrar Sesión ?");
-    if (opcion == true) {
-        loading.style.display = "block"
-        vistaPrincipal.style.display = "none"
-        consultar.style.display = "none"
-        vistaRetirar.style.display = "none"
-        vistaTransferir.style.display = "none"
-        vistaConsignar.style.display = "none"
-        vistaConsignacionExitosa.style.display = "none"
-        vistaRetiroExitoso.style.display = "none"
-        vistaTransferenciaExitosa.style.display = "none"
-        usuarioActual={}
-        estaLogeado=false
-
-        setTimeout(function () {
-            inicio.style.display = "flex"
+    Swal.fire({
+        title: '¿ Estas seguro que quieres Cerrar Sesión ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, estoy seguro!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+           
+            loading.style.display = "block"
             vistaPrincipal.style.display = "none"
             consultar.style.display = "none"
             vistaRetirar.style.display = "none"
             vistaTransferir.style.display = "none"
             vistaConsignar.style.display = "none"
-            loading.style.display = "none"
             vistaConsignacionExitosa.style.display = "none"
             vistaRetiroExitoso.style.display = "none"
             vistaTransferenciaExitosa.style.display = "none"
-        }, 2000)
-    }
+            usuarioActual = {}
+            estaLogeado = false
+
+            setTimeout(function () {
+                inicio.style.display = "flex"
+                vistaPrincipal.style.display = "none"
+                consultar.style.display = "none"
+                vistaRetirar.style.display = "none"
+                vistaTransferir.style.display = "none"
+                vistaConsignar.style.display = "none"
+                loading.style.display = "none"
+                vistaConsignacionExitosa.style.display = "none"
+                vistaRetiroExitoso.style.display = "none"
+                vistaTransferenciaExitosa.style.display = "none"
+            }, 2000)
+            Swal.fire(
+                'Sesion cerrada!!',
+                'Vuelve pronto.',
+                'success'
+            )
+            limpiarInput()
+        }
+    })
 }
 
 
@@ -538,6 +571,7 @@ function consignarDinero() {
         document.getElementById("valor-consignado").textContent = parseInt(document.getElementById("valor-consignar").value)
         document.getElementById("numero-cuenta-consignada").textContent = "Cuenta Propia"
         document.getElementById("fecha-consignacion").textContent = new Date().toLocaleString()
+        localStorage.setItem('cliente', JSON.stringify(dataBaseCuentas))
 
         let fechaConsignacionHistorial = document.createElement("p")
         fechaConsignacionHistorial.textContent = new Date().toLocaleString()
@@ -553,7 +587,12 @@ function consignarDinero() {
 
         consignacionExitosa()
     } else {
-        alert("La cuenta o el valor de consignación no son válidos.");
+        swal.fire({
+            title: "La cuenta o el valor de consignación no son válidos.",
+            icon: 'warning',
+            confirmButtonColor: '#0A0101',
+            timer: 5000
+        })
     }
 
     limpiarInput()
@@ -573,6 +612,7 @@ function retirarDinero() {
         document.getElementById("comprobante-retiro").textContent = comprobante;
         document.getElementById("total-retirado").textContent = valorRetirar;
         document.getElementById("fecha-retiro").textContent = new Date().toLocaleString();
+        localStorage.setItem('cliente', JSON.stringify(dataBaseCuentas))
 
         let fechaConsignacionHistorial = document.createElement("p");
         fechaConsignacionHistorial.textContent = new Date().toLocaleString();
@@ -587,7 +627,12 @@ function retirarDinero() {
         historial.append(movimiento);
         retiroExitoso();
     } else {
-        alert("Valor o contraseña incorrectos");
+        swal.fire({
+            title: "Valor o contraseña incorrectos.",
+            icon: 'warning',
+            confirmButtonColor: '#0A0101',
+            timer: 5000
+        })
     }
 
     limpiarInput();
@@ -604,15 +649,16 @@ function transferirDinero() {
     let contraseñaTransferir = document.getElementById("contraseña-transferir").value
     let cuentaDestino = dataBaseCuentas.find((dataBase) => dataBase.numeroCuenta === nCuentaDestinatario)
 
-    if (contraseñaTransferir === usuarioActual.contraseña &&  valorTransferir >= 10000 && valorTransferir <= usuarioActual.saldo) {
+    if (contraseñaTransferir === usuarioActual.contraseña && valorTransferir >= 10000 && valorTransferir <= usuarioActual.saldo) {
+        comprobante++
         usuarioActual.saldo -= valorTransferir
         cuentaDestino.saldo = Number(cuentaDestino.saldo) + Number(valorTransferir)
-        comprobante++
         document.getElementById("saldoActualizado").textContent = usuarioActual.saldo
         document.getElementById("nombre-destinatario").textContent = nombreDestinatario
         document.getElementById("cuenta-a-transferir").textContent = nCuentaDestinatario
         document.getElementById("valor-transferido").textContent = valorTransferir
         document.getElementById("fecha-transferencia").textContent = new Date().toLocaleString()
+        localStorage.setItem('cliente', JSON.stringify(dataBaseCuentas))
 
         let fechaConsignacionHistorial = document.createElement("p")
         fechaConsignacionHistorial.textContent = new Date().toLocaleString()
@@ -628,7 +674,12 @@ function transferirDinero() {
         transferenciaExitosa()
 
     } else {
-        alert("asegurate de que la cuenta a la que deseas transferir este inscrita en WELT BANC, ademas verifica que tu contraseña sea correcta y el monto valido")
+        swal.fire({
+            title: "asegurate de que la cuenta a la que deseas transferir este inscrita en WELT BANC, ademas verifica que tu contraseña sea correcta y el monto valido.",
+            icon: 'warning',
+            confirmButtonColor: '#0A0101',
+            timer: 7000
+        })
     }
 
     limpiarInput()
